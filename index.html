@@ -158,6 +158,12 @@
         .deck-controls {
             display: none !important;
         }
+
+        .progress-track,
+        .page-count,
+        .fullscreen-toggle {
+            display: none !important;
+        }
     }
 
     /* 8. Reduced motion */
@@ -204,7 +210,6 @@
     .word-wall { position: absolute; font: 400 274px/.78 var(--font-display); letter-spacing: -.09em; color: var(--sky); opacity: .1; text-transform: uppercase; white-space: nowrap; }
     .word-wall.dark { color: #003d91; opacity: .62; }
     .brand-rule { height: 12px; width: 190px; background: var(--sky); }
-    .corner-number { position: absolute; right: 82px; top: 72px; z-index: 20; color: var(--royal); font: 800 23px/1 var(--font-body); letter-spacing: .16em; white-space: nowrap; }
     .section-tag { display: inline-flex; gap: 18px; align-items: center; font: 800 25px/1 var(--font-body); letter-spacing: .12em; text-transform: uppercase; }
     .section-tag::before { content: ''; width: 52px; height: 8px; background: currentColor; }
 
@@ -440,7 +445,6 @@
     .eyebrow { display: flex; align-items: center; gap: 16px; }
     .eyebrow::before { content: ''; width: 13px; height: 13px; flex: 0 0 auto; border-radius: 50%; background: var(--royal); box-shadow: 0 0 0 7px rgba(57,173,242,.16); }
     .title { letter-spacing: -.055em; }
-    .corner-number { padding: 11px 16px; background: var(--royal); color: white; border-radius: 0 0 18px 18px; box-shadow: 0 12px 24px rgba(7,83,184,.2); top: 34px; right: 82px; }
 
     /* Cover: one dominant modular panel with the title layered over it. */
     .cover { background: #fbfcfd; }
@@ -502,6 +506,36 @@
     .iso-card:nth-child(3) { background: linear-gradient(145deg, #d84f27, #f2834d); }
     .iso-card .ghost { font-size: 250px; opacity: .14; right: 12px; bottom: -24px; }
     .shared-base { border-radius: 18px; box-shadow: 0 18px 30px rgba(16,19,25,.22); }
+    .shared-base span { color: white; }
+
+    /* ISO correspondence slide: one simple card per standard. */
+    .iso-cover-grid {
+      position: absolute;
+      left: 220px;
+      right: 220px;
+      top: 330px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+    .iso-cover-grid .iso-card {
+      min-height: 505px;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 28px;
+    }
+    .iso-cover-grid .iso-card .iso-kicker {
+      font: 800 23px/1 var(--font-body);
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      opacity: .8;
+    }
+    .iso-cover-grid .iso-card .num { font-size: 108px; }
+    .iso-cover-grid .iso-card .focus { margin-top: 0; font-size: 50px; }
+    .iso-cover-grid .iso-card .ghost { font-size: 260px; opacity: .13; }
 
     .pdca-wheel { box-shadow: 0 28px 42px rgba(3,45,98,.25); }
     .process-bar { border: 0; border-radius: 20px; box-shadow: 0 14px 28px rgba(7,83,184,.12); }
@@ -570,8 +604,8 @@
       align-items: center;
       line-height: .78;
     }
-    .cover .hero { left: 145px; font-size: 252px; }
-    .cover-sgc { left: 1050px; font-size: 300px; }
+    .cover .hero { left: 145px; font-size: 252px; color: rgba(255,255,255,.15); }
+    .cover-sgc { left: 1050px; font-size: 300px; color: #ffffff; }
     .cover .subtitle { top: 768px; width: 1580px; font-size: 41px; line-height: 1.12; }
     .cover .subtitle strong { color: var(--royal); font-weight: 900; }
     .cover-index { top: 83px; }
@@ -619,6 +653,8 @@
     }
     .definition-slide .sgc-mark::after { display: none; }
     .definition-slide .definition-copy { gap: 31px; }
+    .definition-slide .definition-copy .formula { max-width: 860px; font-size: 96px; line-height: 1; }
+    .definition-slide .eyebrow strong { color: inherit; font-weight: 900; text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 6px; }
 
     .norm-slide > .pad { padding-left: 122px; padding-right: 122px; }
     .norm-slide > .pad > .eyebrow { margin-left: 18px; }
@@ -795,6 +831,17 @@
     .evidence-slide .evidence-chip:nth-child(3) { background: var(--ink); }
     .evidence-slide .evidence-chip:nth-child(4) { background: #e96737; }
 
+    /* Evidence slide reduced to its single headline. */
+    .evidence-only .evidence-title {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 490px;
+      z-index: 2;
+      text-align: center;
+      font-size: 220px;
+    }
+
     .si-slide .system-card::before {
       right: -4px;
       bottom: -28px;
@@ -905,7 +952,7 @@
 
     .components-slide .component-grid {
       left: 98px;
-      right: 98px;
+      right: 430px;
       top: 300px;
       gap: 0;
     }
@@ -938,11 +985,11 @@
     .value-chain-slide .flow-step span { font-size: 20px; max-height: 180px; }
     .value-chain-slide .flow-step.bottleneck { height: 350px; transform: translateY(-25px); }
     .value-chain-slide .flow-legend {
-      left: 400px;
+      left: 250px;
       bottom: 90px;
       transform: none;
-      width: 1120px;
-      justify-content: center;
+      width: 1050px;
+      justify-content: flex-start;
     }
 
     .controls-slide .control-grid {
@@ -983,6 +1030,26 @@
     .qr-block.micro.top-badge img { width: 88px; height: 88px; padding: 4px; }
     .qr-block.micro.top-badge p { margin-top: 5px; font-size: 11px; }
 
+    /* Large, projector-friendly QR used across the VOTAR product section. */
+    .qr-block.large { width: 390px; padding: 26px 22px 22px; }
+    .qr-block.large img { width: 330px; height: 330px; }
+    .qr-block.large p { margin-top: 16px; font-size: 25px; }
+
+    .components-slide .qr-block.large { right: 72px; top: 320px; bottom: auto; }
+    .value-chain-slide .qr-block.large { right: 58px; bottom: 66px; }
+    .control-page-one .qr-block.large { right: 46px; top: 330px; bottom: auto; }
+
+    .architecture-slide .qr-block.hero-qr {
+      left: calc(50% - 340px);
+      right: auto;
+      top: 252px;
+      bottom: auto;
+      width: 680px;
+      padding: 34px 30px 28px;
+    }
+    .architecture-slide .qr-block.hero-qr img { width: 590px; height: 590px; }
+    .architecture-slide .qr-block.hero-qr p { margin-top: 18px; font-size: 29px; }
+
     .components-slide .component-card { position: relative; }
     .components-slide .component-card::before { display: none; }
     .component-hero {
@@ -997,7 +1064,7 @@
 
     .control-page-one .control-grid {
       left: 170px;
-      right: 170px;
+      right: 440px;
       top: 300px;
       grid-template-columns: repeat(3, 1fr);
       gap: 0;
@@ -1012,8 +1079,8 @@
     .control-page-one .control-card,
     .control-page-two .control-card { height: 535px; padding: 42px 38px; }
     .control-page-one .control-card h3,
-    .control-page-two .control-card h3,
-    .control-page-one .control-card:nth-child(3) h3 { font-size: 42px; }
+    .control-page-one .control-card:nth-child(3) h3 { font-size: 37px; }
+    .control-page-two .control-card h3 { font-size: 42px; }
     .control-page-one .control-card p,
     .control-page-two .control-card p { font-size: 29px; }
     .control-card.tone-green { background: #078866; }
@@ -1164,10 +1231,628 @@
     .fingerprint-wall span:nth-child(15) { left: 77%; top: 75%; width: 155px; height: 217px; transform: rotate(-9deg); }
 
     /* ===========================================
+       SCRIPT ALIGNMENT: SLIDES 04 AND 07
+       =========================================== */
+    .norm-slide .norm-layout {
+      padding-top: 92px;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 120px;
+    }
+    .norm-slide .iso-choice {
+      min-height: 420px;
+      display: flex;
+      align-items: center;
+      padding: 0 40px 0 56px;
+      border-left: 8px solid var(--sky);
+    }
+    .norm-slide .iso-choice p {
+      max-width: 560px;
+      margin: 0;
+      color: var(--ink);
+      font: 400 54px/1.08 var(--font-display);
+      letter-spacing: -.035em;
+    }
+
+    .si-slide > .pad { padding-top: 100px; }
+    .si-slide > .pad .title { margin-top: 0 !important; }
+    .si-slide .si-section-label {
+      position: absolute;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      gap: 17px;
+      color: var(--royal);
+      font: 800 23px/1 var(--font-body);
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+    .si-slide .si-section-label::before {
+      content: '';
+      width: 54px;
+      height: 7px;
+      border-radius: 8px;
+      background: var(--sky);
+    }
+    .si-slide .dimensions-label { left: 105px; top: 258px; }
+    .si-slide .triad-label { left: 470px; top: 770px; }
+    .si-slide .si-grid { top: 310px; gap: 22px; }
+    .si-slide .system-card {
+      height: 350px;
+      margin-left: 0;
+      justify-content: center;
+      border-radius: 50%;
+      box-shadow: 0 24px 42px rgba(3,45,98,.18);
+    }
+    .si-slide .system-card::before { right: 38px; bottom: -22px; font-size: 300px; }
+    .si-slide .triad { bottom: 104px; }
+
+    /* ===========================================
+       REFERENCE-LED DIAGRAMS: DIMENSIONS + C4
+       =========================================== */
+    .si-slide .si-grid {
+      left: 135px;
+      right: 135px;
+      top: 320px;
+      height: 400px;
+      gap: 0;
+      overflow: visible;
+      align-items: start;
+    }
+    .si-slide .si-grid::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 194px;
+      height: 22px;
+      border-radius: 14px;
+      background: linear-gradient(90deg,
+        var(--royal) 0 33.333%,
+        #18202a 33.333% 66.666%,
+        var(--sky) 66.666% 100%);
+      box-shadow: 0 14px 28px rgba(3,45,98,.16);
+      z-index: 0;
+    }
+    .si-slide .system-card,
+    .si-slide .system-card:first-child {
+      position: relative;
+      height: 400px;
+      margin: 0;
+      padding: 0;
+      overflow: visible;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    .si-slide .system-card::before { display: none; }
+    .si-slide .dimension-orb {
+      position: relative;
+      z-index: 2;
+      width: 260px;
+      height: 260px;
+      border: 34px solid var(--royal);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: white;
+      box-shadow: 0 20px 38px rgba(3,45,98,.18);
+    }
+    .si-slide .admin .dimension-orb { border-color: #18202a; }
+    .si-slide .si .dimension-orb { border-color: var(--sky); }
+    .si-slide .dimension-orb .hero-icon {
+      width: 105px;
+      height: 105px;
+      color: var(--royal);
+      stroke-width: 1.55;
+    }
+    .si-slide .admin .dimension-orb .hero-icon { color: #18202a; }
+    .si-slide .si .dimension-orb .hero-icon { color: #0875c9; }
+    .si-slide .system-card h3,
+    .si-slide .system-card.admin h3 {
+      margin: 38px 0 0;
+      color: var(--ink);
+      font-size: 39px;
+      text-align: center;
+      letter-spacing: -.025em;
+    }
+    .si-slide .triad-label { top: 790px; }
+    .si-slide .triad { bottom: 130px; }
+
+    .architecture-slide .arch-grid {
+      position: absolute;
+      left: 92px;
+      top: 350px;
+      width: 1340px;
+      height: 390px;
+      display: flex;
+      gap: 0;
+      overflow: visible;
+    }
+    .architecture-slide .layer {
+      position: relative;
+      width: 365px;
+      height: 390px;
+      min-height: 390px;
+      margin-left: -60px;
+      padding: 62px 44px 46px 72px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      color: white;
+      border-radius: 0;
+      background: var(--royal);
+      box-shadow: none;
+      clip-path: polygon(0 0, calc(100% - 62px) 0, 100% 50%, calc(100% - 62px) 100%, 0 100%, 62px 50%);
+      z-index: 1;
+    }
+    .architecture-slide .layer:first-child {
+      margin-left: 0;
+      padding-left: 42px;
+      clip-path: polygon(0 0, calc(100% - 62px) 0, 100% 50%, calc(100% - 62px) 100%, 0 100%, 48px 50%);
+    }
+    .architecture-slide .layer:nth-child(1) { background: #0a4a9e; }
+    .architecture-slide .layer:nth-child(2) { background: #2e9bd6; }
+    .architecture-slide .layer:nth-child(3) { background: #17212d; }
+    .architecture-slide .layer:nth-child(4) { background: #087f9e; }
+    .architecture-slide .layer::before,
+    .architecture-slide .layer::after { display: none !important; }
+    .architecture-slide .layer .index {
+      position: absolute;
+      left: 78px;
+      top: 40px;
+      color: rgba(255,255,255,.58);
+      font: 800 31px/1 var(--font-body);
+      letter-spacing: .06em;
+    }
+    .architecture-slide .layer-icon {
+      width: 92px;
+      height: 92px;
+      color: white;
+      justify-self: auto;
+    }
+    .architecture-slide .layer h3 {
+      margin: 0;
+      color: white;
+      font-size: 28px;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .architecture-slide .qr-block.hero-qr {
+      left: auto;
+      right: 82px;
+      top: 372px;
+      width: 330px;
+      padding: 22px 20px 18px;
+      border-radius: 26px;
+    }
+    .architecture-slide .qr-block.hero-qr img { width: 260px; height: 260px; }
+    .architecture-slide .qr-block.hero-qr p { margin-top: 13px; font-size: 21px; }
+
+    /* The directional reference belongs to slide 11, not the C4 QR slide. */
+    .architecture-slide .arch-grid { display: none !important; }
+    .architecture-slide .qr-block.hero-qr {
+      left: calc(50% - 340px);
+      right: auto;
+      top: 252px;
+      width: 680px;
+      padding: 34px 30px 28px;
+      border-radius: 28px;
+    }
+    .architecture-slide .qr-block.hero-qr img { width: 590px; height: 590px; }
+    .architecture-slide .qr-block.hero-qr p { margin-top: 18px; font-size: 29px; }
+
+    .components-slide .component-grid {
+      left: 88px;
+      right: auto;
+      top: 340px;
+      width: 1320px;
+      height: 450px;
+      display: flex;
+      gap: 0;
+      overflow: visible;
+    }
+    .components-slide .component-card,
+    .components-slide .component-card:first-child {
+      position: relative;
+      width: 470px;
+      min-height: 450px;
+      height: 450px;
+      margin-left: -58px;
+      padding: 54px 54px 42px 82px;
+      border-radius: 0;
+      color: white;
+      background: #0a4a9e;
+      box-shadow: none;
+      clip-path: polygon(0 0, calc(100% - 68px) 0, 100% 50%, calc(100% - 68px) 100%, 0 100%, 68px 50%);
+      overflow: hidden;
+    }
+    .components-slide .component-card:first-child { margin-left: 0; }
+    .components-slide .component-card:nth-child(1) { background: #0a4a9e; }
+    .components-slide .component-card:nth-child(2) { background: #2e9bd6; }
+    .components-slide .component-card:nth-child(3) { background: #17212d; color: white; }
+    .components-slide .component-card .icon {
+      position: absolute;
+      left: 92px;
+      top: 38px;
+      width: auto;
+      height: auto;
+      margin: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      color: rgba(255,255,255,.62);
+      font: 800 30px/1 var(--font-body);
+    }
+    .components-slide .component-hero {
+      left: 50%;
+      right: auto;
+      top: 76px;
+      width: 104px;
+      height: 104px;
+      transform: translateX(-42%);
+      color: white;
+      opacity: 1;
+    }
+    .components-slide .component-card h3 {
+      margin: 174px 0 0;
+      color: white;
+      font-size: 35px;
+      line-height: 1;
+      text-align: center;
+    }
+    .components-slide .component-card p {
+      margin-top: 24px;
+      color: white;
+      font-size: 25px;
+      line-height: 1.24;
+      text-align: center;
+      opacity: .88;
+    }
+    .components-slide .qr-block.large {
+      right: 62px;
+      top: 400px;
+      width: 305px;
+      padding: 20px 18px 17px;
+    }
+    .components-slide .qr-block.large img { width: 245px; height: 245px; }
+    .components-slide .qr-block.large p { margin-top: 12px; font-size: 19px; }
+
+    .evidence-only::before { display: none !important; }
+    .evidence-only .evidence-title {
+      top: 50%;
+      transform: translateY(-50%);
+      margin: 0;
+    }
+
+    /* ===========================================
+       QR SCALE + ICON WEIGHT REFINEMENTS
+       =========================================== */
+    .qr-block.large {
+      padding: 14px 12px 12px;
+    }
+    .qr-block.large img {
+      width: 350px;
+      height: 350px;
+      padding: 3px;
+    }
+    .components-slide .component-hero {
+      width: 108px;
+      height: 108px;
+      top: 72px;
+      stroke-width: 1.35;
+    }
+    .components-slide .qr-block.large {
+      right: 150px;
+      top: 365px;
+      width: 365px;
+      padding: 12px 10px 10px;
+    }
+    .components-slide .qr-block.large img {
+      width: 335px;
+      height: 335px;
+      padding: 2px;
+    }
+    .architecture-slide .qr-block.hero-qr {
+      left: calc(50% - 325px);
+      top: 250px;
+      width: 650px;
+      padding: 14px 12px;
+    }
+    .architecture-slide .qr-block.hero-qr img {
+      width: 610px;
+      height: 610px;
+      padding: 2px;
+    }
+    .control-card.tone-green h3,
+    .control-card.tone-green p { color: white !important; }
+    .control-card.tone-green .ring { border-color: white !important; }
+    .control-card.tone-green .ghost {
+      color: white !important;
+      opacity: .16 !important;
+    }
+
+    .slide.evidence-only:not(.cover):not(.section-slide):not(.thanks)::after {
+      left: 50%;
+      right: auto;
+      top: 50%;
+      bottom: auto;
+      width: calc(100% - 192px);
+      height: 686px;
+      transform: translate(-50%, -50%);
+    }
+    .evidence-only .evidence-title {
+      left: 96px;
+      right: 96px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    /* ===========================================
+       C4 LEVELS + ABSOLUTE EVIDENCE CENTERING
+       =========================================== */
+    .architecture-slide .qr-block.hero-qr {
+      left: 118px;
+      right: auto;
+      top: 280px;
+      width: 620px;
+      padding: 12px 10px;
+    }
+    .architecture-slide .qr-block.hero-qr img {
+      width: 585px;
+      height: 585px;
+    }
+    .architecture-slide .arch-grid {
+      display: grid !important;
+      left: 850px;
+      right: auto;
+      top: 300px;
+      width: 920px;
+      height: 540px;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 22px;
+      overflow: visible;
+    }
+    .architecture-slide .layer,
+    .architecture-slide .layer:first-child {
+      width: auto;
+      height: auto;
+      min-height: 0;
+      margin: 0;
+      padding: 38px 34px 30px;
+      border-radius: 28px;
+      clip-path: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      box-shadow: 0 20px 34px rgba(3,45,98,.16);
+    }
+    .architecture-slide .layer .index {
+      left: 28px;
+      top: 24px;
+      font-size: 25px;
+    }
+    .architecture-slide .layer-icon {
+      width: 72px;
+      height: 72px;
+    }
+    .architecture-slide .layer h3 { font-size: 30px; }
+
+    .evidence-only .evidence-title {
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      transform: none;
+      display: grid;
+      place-items: center;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    .value-chain-slide .process-key {
+      position: absolute;
+      left: 310px;
+      top: 700px;
+      z-index: 4;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .value-chain-slide .process-key span {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      min-height: 54px;
+      padding: 12px 18px;
+      border: 2px solid rgba(7,83,184,.12);
+      border-radius: 999px;
+      background: white;
+      color: #344151;
+      box-shadow: 0 10px 20px rgba(3,45,98,.08);
+      font: 800 21px/1 var(--font-body);
+      white-space: nowrap;
+    }
+    .value-chain-slide .process-key i {
+      width: 22px;
+      height: 22px;
+      flex: 0 0 22px;
+      border-radius: 6px;
+      background: #eaf2fb;
+      box-shadow: inset 0 0 0 2px rgba(7,83,184,.12);
+    }
+    .value-chain-slide .process-key .voter-key i { background: #c8eaff; }
+    .value-chain-slide .process-key .critical-key i {
+      background: var(--royal);
+      box-shadow: inset 0 -5px 0 var(--danger);
+    }
+
+    .shared-sgc-title {
+      position: absolute;
+      left: 92px;
+      right: 92px;
+      top: 128px;
+      z-index: 4;
+      margin: 0;
+      color: var(--ink);
+      font: 400 82px/.94 var(--font-display);
+      letter-spacing: -.045em;
+      text-align: left;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .definition-slide::before,
+    .norm-slide::before { top: 220px !important; }
+
+    /* QR cards with captions: tighter crop and minimal caption gap. */
+    .qr-block.large {
+      padding: 6px 6px 8px !important;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    .qr-block.large img {
+      display: block;
+      width: calc(100% - 8px) !important;
+      height: auto !important;
+      aspect-ratio: 1;
+      margin: 0 auto;
+      padding: 0 !important;
+      transform: scale(1.035);
+      transform-origin: center;
+    }
+    .qr-block.large p {
+      position: relative;
+      z-index: 2;
+      margin-top: 2px !important;
+      padding-bottom: 2px;
+      background: white;
+    }
+
+    /* Unified editorial title system for content slides. */
+    .votar-intro-slide .header-title,
+    .architecture-slide .header-title,
+    .value-chain-slide .direct-title,
+    .controls-slide .direct-title {
+      left: 92px;
+      right: 92px;
+      top: 128px;
+      max-width: none;
+      margin: 0;
+      font-size: 82px;
+      line-height: .94;
+      letter-spacing: -.045em;
+      white-space: nowrap;
+    }
+    .si-slide > .pad { padding-top: 128px; }
+    .value-chain-slide .direct-title {
+      font-size: 78px;
+      transform: none;
+    }
+
+    /* ===========================================
+       CONCLUSION RADIAL
+       =========================================== */
+    .conclusion-radial {
+      position: absolute;
+      inset: 250px 90px 54px;
+      z-index: 2;
+    }
+    .conclusion-wheel {
+      position: absolute;
+      left: 50%;
+      top: 12px;
+      width: 660px;
+      height: 660px;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      background: conic-gradient(from -60deg,
+        #0a4a9e 0 118deg,
+        white 118deg 120deg,
+        #078866 120deg 238deg,
+        white 238deg 240deg,
+        #e96737 240deg 358deg,
+        white 358deg 360deg
+      );
+      box-shadow: 0 28px 48px rgba(3,45,98,.2);
+    }
+    .conclusion-wheel::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 380px;
+      height: 380px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: white;
+      box-shadow: inset 0 0 0 2px rgba(7,83,184,.08), 0 12px 28px rgba(3,45,98,.12);
+    }
+    .wheel-center {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      z-index: 3;
+      transform: translate(-50%, -50%);
+      color: var(--royal);
+      font: 400 70px/1 var(--font-display);
+      letter-spacing: -.055em;
+    }
+    .iso-segment-label {
+      position: absolute;
+      z-index: 4;
+      width: 180px;
+      color: white;
+      text-align: center;
+    }
+    .iso-segment-label strong,
+    .iso-segment-label small {
+      position: relative;
+      z-index: 2;
+      display: block;
+      text-transform: uppercase;
+    }
+    .iso-segment-label strong { font: 400 30px/1 var(--font-display); }
+    .iso-segment-label small { margin-top: 7px; font: 800 19px/1 var(--font-body); }
+    .iso-segment-label .segment-ghost {
+      position: absolute;
+      left: 50%;
+      top: -54px;
+      z-index: 1;
+      transform: translateX(-50%);
+      color: white;
+      font: 400 150px/.8 var(--font-display);
+      opacity: .18;
+    }
+    .iso-segment-label.segment-q { left: 240px; top: 44px; }
+    .iso-segment-label.segment-a { right: 34px; bottom: 116px; }
+    .iso-segment-label.segment-s { left: 34px; bottom: 116px; }
+
+    /* ===========================================
        VIEWER CONTROLS & INLINE EDITING
        =========================================== */
-    .progress { position: fixed; left: 0; bottom: 0; height: 5px; background: var(--sky); z-index: 9000; transition: width .35s var(--ease); }
+    .progress-track { position: fixed; top: 0; left: 0; right: 0; height: 8px; background: rgba(7,83,184,.10); z-index: 9000; pointer-events: none; }
+    .progress { height: 100%; width: 0; background: linear-gradient(90deg, var(--royal), var(--sky)); box-shadow: 0 2px 12px rgba(57,173,242,.45); transition: width .45s var(--ease); }
     .page-count { position: fixed; right: 18px; bottom: 16px; z-index: 9000; min-width: 68px; padding: 7px 10px; border-radius: 999px; background: rgba(10,19,35,.72); color: white; font: 700 12px/1 var(--font-body); letter-spacing: .08em; text-align: center; white-space: nowrap; }
+    .fullscreen-toggle { position: fixed; right: 98px; bottom: 13px; z-index: 9001; width: 36px; height: 36px; border: 0; border-radius: 50%; background: rgba(10,19,35,.72); color: white; display: grid; place-items: center; cursor: pointer; opacity: .7; transition: opacity .2s ease, background .2s ease; }
+    .fullscreen-toggle:hover { opacity: 1; background: rgba(7,83,184,.9); }
+    .fullscreen-toggle svg { width: 19px; height: 19px; }
+    body.presenting .edit-hotzone,
+    body.presenting .edit-toggle { display: none !important; }
+    body.presenting .fullscreen-toggle { opacity: .28; }
+    body.presenting .fullscreen-toggle:hover { opacity: 1; }
     .edit-hotzone { position: fixed; top: 0; left: 0; width: 80px; height: 80px; z-index: 10000; cursor: pointer; }
     .edit-toggle { position: fixed; top: 16px; left: 16px; width: 48px; height: 48px; border: 0; border-radius: 50%; background: var(--ink); color: white; opacity: 0; pointer-events: none; transition: opacity .3s ease; z-index: 10001; cursor: pointer; }
     .edit-toggle.show, .edit-toggle.active { opacity: 1; pointer-events: auto; }
@@ -1184,7 +1869,7 @@
       <section class="slide cover active visible" aria-label="Portada">
         <div class="frame"></div>
         <div class="cover-sgc" aria-hidden="true">SGC</div>
-        <div class="topline reveal">Sistema de Gestión</div>
+        <div class="topline reveal">Sistemas de Gestión</div>
         <div class="hero reveal-left d1">VOTAR</div>
         <div class="subtitle reveal d2">Calidad aplicada a un <strong>Sistema de Votación Electrónica con Tecnología Blockchain</strong></div>
         <div class="cover-members reveal d3">Mosconi Ignacio <span>-</span> Magni Gastón <span>-</span> Terreno Valentino</div>
@@ -1208,25 +1893,22 @@
 
       <!-- 03 — Definición -->
       <section class="slide definition-slide" aria-label="Definición de Sistema de Gestión de Calidad">
-        <div class="frame"></div><div class="corner-number">03 / 19</div>
+        <div class="frame"></div>
+        <h2 class="shared-sgc-title reveal">Sistemas de Gestión de Calidad</h2>
         <div class="pad definition-grid">
           <div class="sgc-mark reveal-scale">SGC</div>
           <div class="definition-copy">
-            <div class="eyebrow reveal">Sistema de Gestión de Calidad</div>
-            <div class="formula reveal d1">Normas + procesos para garantizar calidad</div>
-            <div class="element-grid reveal d2">
-              <span>Estructura</span><span>Planificación</span><span>Recursos</span><span>Procesos</span><span>Procedimientos</span>
-            </div>
-            <p class="body reveal d3">Control + <span class="blue">mejora continua</span>.</p>
+            <div class="eyebrow reveal">Sistema de Gestión de Calidad <strong>(SGC)</strong></div>
+            <div class="formula reveal d1">Normas + procesos</div>
           </div>
         </div>
       </section>
 
       <!-- 04 — Normas -->
       <section class="slide norm-slide" aria-label="Qué es una norma">
-        <div class="frame"></div><div class="corner-number">04 / 19</div>
+        <div class="frame"></div>
+        <h2 class="shared-sgc-title reveal">Sistemas de Gestión de Calidad</h2>
         <div class="pad">
-          <div class="eyebrow reveal">El lenguaje común de la calidad</div>
           <div class="norm-layout">
             <div class="norm-card reveal-left d1">
               <div class="section-tag blue">Documento reconocido</div>
@@ -1235,10 +1917,7 @@
               <p class="body" style="margin-top:42px">Reglas y criterios para usos <span class="blue">comunes y repetidos</span>.</p>
             </div>
             <div class="iso-choice reveal d2">
-              <span class="eyebrow">La elección estratégica</span>
-              <strong>ISO</strong>
-              <p>Reconocimiento internacional y ventaja competitiva.</p>
-              <div class="benefits"><span class="benefit">Confianza</span><span class="benefit">Estándar</span><span class="benefit">Escala</span></div>
+              <p>Reconocimiento internacional y <span style="white-space:nowrap">ventaja competitiva.</span></p>
             </div>
           </div>
         </div>
@@ -1246,163 +1925,120 @@
 
       <!-- 05 — Normas ISO -->
       <section class="slide iso-slide" aria-label="Tres normas ISO para el sistema de gestión">
-        <div class="frame"></div><div class="corner-number">05 / 19</div>
+        <div class="frame"></div>
         <div class="pad"><div class="eyebrow reveal">Un SGC integrado</div><h2 class="title reveal d1" style="margin-top:22px">Normas ISO</h2></div>
         <div class="iso-stack">
-          <article class="iso-card reveal d1"><div class="num">9001</div><div class="focus">Calidad</div><ul><li>Procesos</li><li>Métricas</li><li>Mejora continua</li></ul><div class="ghost">Q</div></article>
-          <article class="iso-card reveal d2"><div class="num">14001</div><div class="focus">Ambiente</div><ul><li>Impactos</li><li>Mitigación</li><li>Uso responsable</li></ul><div class="ghost">A</div></article>
-          <article class="iso-card reveal d3"><div class="num">45001</div><div class="focus">Personas</div><ul><li>Peligros</li><li>Controles</li><li>Prevención</li></ul><div class="ghost">S</div></article>
+          <article class="iso-card reveal d1"><div class="num">9001</div><div class="focus">Calidad</div><ul><li>Procesos.</li><li>Métricas.</li><li>Mejora continua.</li></ul><div class="ghost">Q</div></article>
+          <article class="iso-card reveal d2"><div class="num">14001</div><div class="focus">Ambiente</div><ul><li>Impactos.</li><li>Mitigación.</li><li>Uso responsable.</li></ul><div class="ghost">A</div></article>
+          <article class="iso-card reveal d3"><div class="num">45001</div><div class="focus">Personas</div><ul><li>Peligros.</li><li>Controles.</li><li>Prevención.</li></ul><div class="ghost">S</div></article>
         </div>
-        <div class="shared-base reveal d4"><span>Misma estructura</span><span>-</span><span>Alta compatibilidad</span></div>
+        <div class="shared-base reveal d4"><span>¿Por qué estas normas?</span></div>
       </section>
 
-      <!-- 06 — Enfoque por procesos -->
-      <section class="slide pdca-slide" aria-label="Enfoque por procesos y ciclo PDCA">
-        <div class="frame"></div><div class="corner-number">06 / 19</div>
-        <div class="pad"><div class="eyebrow reveal">La calidad se diseña en el proceso</div><h2 class="title reveal d1" style="margin-top:22px">Ciclo de Deming</h2></div>
-        <div class="pdca-layout">
-          <div class="pdca-wheel reveal-scale d1"><div><span>Plan</span></div><div><span>Do</span></div><div><span>Act</span></div><div><span>Check</span></div></div>
-          <div class="process-stack">
-            <h3 class="reveal d1">Tres tipos de procesos</h3>
-            <div class="process-bar reveal d2"><strong>Estratégicos</strong><span>Dirección, riesgos y objetivos.</span></div>
-            <div class="process-bar reveal d3"><strong>Operativos</strong><span>La cadena de valor del servicio.</span></div>
-            <div class="process-bar reveal d4"><strong>Soporte</strong><span>Recursos, información y formación.</span></div>
-          </div>
-        </div>
+      <!-- 06 — Evidencias -->
+      <section class="slide evidence-slide evidence-only" aria-label="Evidencia">
+        <div class="frame"></div>
+        <h2 class="title reveal evidence-title">Evidencia</h2>
       </section>
 
-      <!-- 07 — Evidencias -->
-      <section class="slide evidence-slide" aria-label="La importancia de las evidencias">
-        <div class="frame"></div><div class="corner-number">07 / 19</div>
-        <div class="eyebrow reveal" style="position:absolute;left:98px;top:82px">Auditar exige demostrar</div>
-        <div class="evidence-quote reveal-left d1"><span class="strike">Decir</span> no alcanza.<br><span class="blue">Hay que probar.</span></div>
-        <div class="audit-stamp reveal-scale d2">Evidencia<br>verificable</div>
-        <div class="evidence-strip reveal d3"><span class="evidence-chip">Política</span><span class="evidence-chip">Sistema</span><span class="evidence-chip">Instrucciones</span><span class="evidence-chip">Registros</span></div>
-      </section>
-
-      <!-- 08 — SGC + SI -->
+      <!-- 07 — SGC + SI -->
       <section class="slide si-slide" aria-label="El SGC necesita un Sistema de Información">
-        <div class="frame"></div><div class="corner-number">08 / 19</div>
-        <div class="pad"><div class="eyebrow reveal">Tres dimensiones, un sistema</div><h2 class="title reveal d1" style="margin-top:24px">SGC + SI</h2></div>
+        <div class="frame"></div>
+        <div class="pad"><h2 class="title reveal d1">SGC + SI</h2></div>
+        <div class="si-section-label dimensions-label reveal d1">Dimensiones</div>
         <div class="si-grid">
-          <article class="system-card sgc reveal-left d1"><h3>Organización</h3><p>Procesos, políticas y procedimientos.</p></article>
-          <article class="system-card admin reveal d2"><h3>Administración</h3><p>Responsables, decisiones e información.</p></article>
-          <article class="system-card si reveal d3"><h3>Tecnología</h3><p>Evidencias, automatización y control.</p></article>
+          <article class="system-card sgc reveal-left d1"><div class="dimension-orb"><svg class="hero-icon" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15m-.75 0v18m-13.5 0V3m3 4.5h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6h1.5m-1.5 3h1.5m-1.5 3h1.5M8.25 21v-3.375c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125V21"/></svg></div><h3>Organización</h3></article>
+          <article class="system-card admin reveal d2"><div class="dimension-orb"><svg class="hero-icon" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.203-.575-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z"/></svg></div><h3>Administración</h3></article>
+          <article class="system-card si reveal d3"><div class="dimension-orb"><svg class="hero-icon" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 15.75H3m18 0h-1.5M8.25 19.5V21M15.75 3v1.5m0 15V21m3.75-12.75H21m-1.5 7.5H21M6.75 4.5h10.5a2.25 2.25 0 0 1 2.25 2.25v10.5a2.25 2.25 0 0 1-2.25 2.25H6.75a2.25 2.25 0 0 1-2.25-2.25V6.75A2.25 2.25 0 0 1 6.75 4.5Zm2.25 4.5h6v6H9V9Z"/></svg></div><h3>Tecnología</h3></article>
         </div>
+        <div class="si-section-label triad-label reveal d4">Tríada de competencias</div>
         <div class="triad reveal d4"><div>Saber</div><div>Saber hacer</div><div>Querer hacer</div></div>
       </section>
 
-      <!-- 09 — Parte 2 -->
+      <!-- 08 — Parte 2 -->
       <section class="slide section-slide votar-section" aria-label="Parte 2: VOTAR">
         <div class="fingerprint-wall" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
         <div class="word-wall dark wall-a" aria-hidden="true">VOTAR</div><div class="word-wall dark wall-b" aria-hidden="true">VOTAR</div><div class="word-wall dark wall-c" aria-hidden="true">VOTAR</div><div class="word-wall dark wall-d" aria-hidden="true">VOTAR</div><div class="word-wall dark wall-e" aria-hidden="true">VOTAR</div><div class="word-wall dark wall-f" aria-hidden="true">VOTAR</div><div class="word-wall dark wall-g" aria-hidden="true">VOTAR</div><div class="word-wall dark wall-h" aria-hidden="true">VOTAR</div>
         <div class="part reveal">Parte 02 / Proyecto Final</div><div class="dash reveal-left d1"></div><h2 class="reveal d2">VOTAR</h2>
       </section>
 
-      <!-- 10 — Qué es VOTAR -->
+      <!-- 09 — Qué es VOTAR -->
       <section class="slide votar-intro-slide" aria-label="Qué es VOTAR">
-        <div class="frame"></div><div class="corner-number">10 / 19</div>
+        <div class="frame"></div>
         <div class="pad"><h2 class="title header-title reveal">Código abierto - Elecciones B2B</h2></div>
         <div class="votar-hero reveal-left d1">VOTAR</div>
         <div class="votar-copy reveal d2">Voto remoto con <span class="blue">integridad</span>, <span class="blue">inmutabilidad</span> y transparencia.</div>
         <div class="votar-tags reveal d3"><span>Verificabilidad</span><span>Auditabilidad</span><span>Desvinculación</span></div>
       </section>
 
-      <!-- 11 — Arquitectura -->
+      <!-- 10 — Arquitectura -->
       <section class="slide architecture-slide" aria-label="Arquitectura de VOTAR">
-        <div class="frame"></div><div class="corner-number">11 / 19</div>
+        <div class="frame"></div>
         <div class="pad"><h2 class="title header-title reveal">Arquitectura C4</h2></div>
         <div class="arch-grid">
-          <article class="layer reveal d1"><div class="index">01</div><div class="layer-icon" aria-hidden="true"><svg class="hero-icon" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418"/></svg></div><h3>Contexto</h3></article>
-          <article class="layer reveal d2"><div class="index">02</div><div class="layer-icon" aria-hidden="true"><svg class="hero-icon" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6.878V6a2.25 2.25 0 0 1 2.25-2.25h7.5A2.25 2.25 0 0 1 18 6v.878m-12 0c.235-.083.487-.128.75-.128h10.5c.263 0 .515.045.75.128m-12 0A2.25 2.25 0 0 0 4.5 9v.878m13.5-3A2.25 2.25 0 0 1 19.5 9v.878m0 0a2.246 2.246 0 0 0-.75-.128H5.25c-.263 0-.515.045-.75.128m15 0A2.25 2.25 0 0 1 21 12v6a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 18v-6c0-.98.626-1.813 1.5-2.122"/></svg></div><h3>Contenedores</h3></article>
-          <article class="layer reveal d3"><div class="index">03</div><div class="layer-icon" aria-hidden="true"><svg class="hero-icon" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z"/></svg></div><h3>Componentes</h3></article>
-          <article class="layer reveal d4"><div class="index">04</div><div class="layer-icon" aria-hidden="true"><svg class="hero-icon" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5"/></svg></div><h3>Código</h3></article>
+          <article class="layer reveal-left d1"><span class="index">01</span><svg class="hero-icon layer-icon" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a9.004 9.004 0 0 1 7.843 4.582M12 3a9.004 9.004 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418"/></svg><h3>Contexto</h3></article>
+          <article class="layer reveal d2"><span class="index">02</span><svg class="hero-icon layer-icon" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25m0-9L3 7.5m9 5.25v9M3 7.5v9l9 5.25"/></svg><h3>Contenedores</h3></article>
+          <article class="layer reveal d3"><span class="index">03</span><svg class="hero-icon layer-icon" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z"/></svg><h3>Componentes</h3></article>
+          <article class="layer reveal d4"><span class="index">04</span><svg class="hero-icon layer-icon" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5"/></svg><h3>Código</h3></article>
         </div>
-        <div class="qr-block reveal-scale d3"><img src="assets/votar-c4-qr.png" alt="QR a la arquitectura C4 de VOTAR"><p>Escaneá la arquitectura completa</p></div>
+        <div class="qr-block hero-qr reveal-scale d3"><img src="assets/votar-c4-qr-hires.png" alt="QR a la arquitectura C4 de VOTAR"></div>
       </section>
 
-      <!-- 12 — Componentes -->
+      <!-- 11 — Componentes -->
       <section class="slide components-slide" aria-label="Componentes principales de VOTAR">
-        <div class="frame"></div><div class="corner-number">12 / 19</div>
-        <div class="pad"><div class="eyebrow reveal">Ecosistema VOTAR</div><h2 class="title reveal d1" style="margin-top:22px">Tres componentes</h2></div>
+        <div class="frame"></div>
+        <div class="pad"><div class="eyebrow reveal" aria-hidden="true" style="visibility:hidden">&nbsp;</div><h2 class="title reveal d1" style="margin-top:22px">Tres componentes</h2></div>
         <div class="component-grid">
           <article class="component-card reveal d1"><div class="icon">01</div><svg class="hero-icon component-hero" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z"/></svg><h3>Gestión electoral</h3><p>Comicio, padrón y actas oficiales.</p></article>
           <article class="component-card reveal d2"><div class="icon">02</div><svg class="hero-icon component-hero" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Zm6-10.125a1.875 1.875 0 1 1-3.75 0 1.875 1.875 0 0 1 3.75 0Zm1.294 6.336a6.721 6.721 0 0 1-3.17.789 6.721 6.721 0 0 1-3.168-.789 3.376 3.376 0 0 1 6.338 0Z"/></svg><h3>Boleta Única Digital</h3><p>La interfaz segura del votante.</p></article>
           <article class="component-card reveal d3"><div class="icon">03</div><svg class="hero-icon component-hero" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0 0 20.25 18V6A2.25 2.25 0 0 0 18 3.75H6A2.25 2.25 0 0 0 3.75 6v12A2.25 2.25 0 0 0 6 20.25Z"/></svg><h3>Dashboard público</h3><p>Escrutinio y Audit Log trazable.</p></article>
         </div>
-        <div class="qr-block micro reveal-scale d4"><img src="assets/votar-c4-qr.png" alt="QR a la arquitectura C4 de VOTAR"><p>Arquitectura C4</p></div>
+        <div class="qr-block large reveal-scale d4"><img src="assets/votar-c4-qr-hires.png" alt="QR a la arquitectura C4 de VOTAR"><p>Arquitectura C4</p></div>
       </section>
 
-      <!-- 13 — Cadena de valor -->
+      <!-- 12 — Cadena de valor -->
       <section class="slide value-chain-slide" aria-label="Cadena de valor del proceso electoral">
-        <div class="frame"></div><div class="corner-number">13 / 19</div>
+        <div class="frame"></div>
         <div class="pad"><h2 class="title reveal d1 direct-title">Cadena de valor - Proceso electoral</h2></div>
         <div class="flow-band">
           <div class="flow-step admin reveal d1"><strong>01</strong><span>Autenticación</span></div><div class="flow-step admin reveal d1"><strong>02</strong><span>Comicio</span></div><div class="flow-step admin reveal d1"><strong>03</strong><span>Padrón</span></div><div class="flow-step admin reveal d2"><strong>04</strong><span>Merkle</span></div><div class="flow-step admin reveal d2"><strong>05</strong><span>Oferta</span></div><div class="flow-step admin reveal d2"><strong>06</strong><span>Oficializar</span></div><div class="flow-step admin reveal d3"><strong>07</strong><span>Apertura</span></div><div class="flow-step voter reveal d3"><strong>08</strong><span>Acceso BUD</span></div><div class="flow-step bottleneck reveal-scale d4"><strong>09</strong><span>Criptografía</span></div><div class="flow-step voter reveal d4"><strong>10</strong><span>Selección</span></div><div class="flow-step voter reveal d5"><strong>11</strong><span>Emisión</span></div><div class="flow-step voter reveal d5"><strong>12</strong><span>Recibo</span></div>
         </div>
+        <div class="process-key reveal d4" aria-label="Leyenda de grupos de proceso"><span><i></i>Administración electoral</span><span class="voter-key"><i></i>Experiencia del votante</span><span class="critical-key"><i></i>Punto crítico criptográfico</span></div>
         <div class="flow-legend reveal d4"><div class="metric">09</div><p>Preparación criptográfica: el rendimiento depende del <span class="blue">dispositivo</span> y la <span class="blue">red</span>.</p></div>
-        <div class="qr-block micro reveal-scale d5"><img src="assets/votar-c4-qr.png" alt="QR a la arquitectura C4 de VOTAR"><p>Arquitectura C4</p></div>
+        <div class="qr-block large reveal-scale d4"><img src="assets/votar-c4-qr-hires.png" alt="QR a la arquitectura C4 de VOTAR"><p>Arquitectura C4</p></div>
       </section>
 
-      <!-- 14 — Controles I -->
-      <section class="slide controls-slide control-page-one" aria-label="Procesos de control, primera parte">
-        <div class="frame"></div><div class="corner-number">14 / 19</div>
+      <!-- 13 — Controles -->
+      <section class="slide controls-slide control-page-one" aria-label="Procesos de control">
+        <div class="frame"></div>
         <div class="pad"><h2 class="title reveal d1 direct-title">Procesos de control</h2></div>
         <div class="control-grid">
-          <article class="control-card reveal d1"><div class="ring"></div><h3>Identidad y padrón</h3><p>Merkle Proof sin datos personales on-chain.</p><div class="ghost">I</div></article>
-          <article class="control-card reveal d2"><div class="ring"></div><h3>Unicidad</h3><p>Solo se computa el último voto emitido.</p><div class="ghost">U</div></article>
-          <article class="control-card reveal d2"><div class="ring"></div><h3>Desvinculación</h3><p>Autenticación y emisión en capas separadas.</p><div class="ghost">D</div></article>
+          <article class="control-card reveal d1"><div class="ring"></div><h3>Identidad y padrón</h3><p>Merkle Proof sin datos personales on-chain.</p><div class="ghost">P</div></article>
+          <article class="control-card reveal d2"><div class="ring"></div><h3>Desvinculación de identidad</h3><p>Autenticación y emisión en capas separadas.</p><div class="ghost">D</div></article>
+          <article class="control-card tone-green reveal d2"><div class="ring"></div><h3>Inmutabilidad</h3><p>Los bloques confirmados no se alteran.</p><div class="ghost">B</div></article>
         </div>
-        <div class="qr-block micro reveal-scale d4"><img src="assets/votar-c4-qr.png" alt="QR a la arquitectura C4 de VOTAR"><p>Arquitectura C4</p></div>
+        <div class="qr-block large reveal-scale d4"><img src="assets/votar-c4-qr-hires.png" alt="QR a la arquitectura C4 de VOTAR"><p>Arquitectura C4</p></div>
       </section>
 
-      <!-- 15 — Controles II -->
-      <section class="slide controls-slide control-page-two" aria-label="Procesos de control, segunda parte">
-        <div class="frame"></div><div class="corner-number">15 / 19</div>
-        <div class="pad"><h2 class="title reveal d1 direct-title">Procesos de control</h2></div>
-        <div class="control-grid">
-          <article class="control-card tone-green reveal d1"><div class="ring"></div><h3>Inmutabilidad</h3><p>Los bloques confirmados no se alteran.</p><div class="ghost">B</div></article>
-          <article class="control-card tone-orange reveal d2"><div class="ring"></div><h3>Auditoría pública</h3><p>Escrutinio y Audit Log verificables.</p><div class="ghost">A</div></article>
-        </div>
-        <div class="qr-block micro reveal-scale d4"><img src="assets/votar-c4-qr.png" alt="QR a la arquitectura C4 de VOTAR"><p>Arquitectura C4</p></div>
-      </section>
-
-      <!-- 16 — Áreas técnicas -->
-      <section class="slide" aria-label="Áreas técnicas del proyecto VOTAR">
-        <div class="frame"></div><div class="corner-number">16 / 19</div>
-        <div class="pad"><div class="eyebrow reveal">Organización del equipo</div><h2 class="title reveal d1" style="margin-top:22px">Cuatro áreas técnicas</h2></div>
-        <div class="area-grid">
-          <article class="area-card reveal d1"><div class="area-num">01</div><div><h3>Arquitectura + Blockchain</h3><p>C4, Solidity, ciclo de vida y validación Merkle.</p></div><div class="area-symbol" aria-hidden="true"><svg class="hero-icon" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m21 7.5-2.25-1.313M21 7.5v2.25m0-2.25-2.25 1.313M3 7.5l2.25-1.313M3 7.5l2.25 1.313M3 7.5v2.25m9 3 2.25-1.313M12 12.75l-2.25-1.313M12 12.75V15m0 6.75 2.25-1.313M12 21.75V19.5m0 2.25-2.25-1.313m0-16.875L12 2.25l2.25 1.313M21 14.25v2.25l-2.25 1.313m-13.5 0L3 16.5v-2.25"/></svg></div></article>
-          <article class="area-card reveal d2"><div class="area-num">02</div><div><h3>Backend + Seguridad</h3><p>Padrón, pruebas criptográficas y OAuth 2.0.</p></div><div class="area-symbol" aria-hidden="true"><svg class="hero-icon" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/></svg></div></article>
-          <article class="area-card reveal d3"><div class="area-num">03</div><div><h3>Frontend + UX</h3><p>BUD, panel y dashboard sin fricción criptográfica.</p></div><div class="area-symbol" aria-hidden="true"><svg class="hero-icon" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 0 1-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0 1 15 18.257V17.25m6-12V15a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 15V5.25m18 0A2.25 2.25 0 0 0 18.75 3H5.25A2.25 2.25 0 0 0 3 5.25m18 0V12a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 12V5.25"/></svg></div></article>
-          <article class="area-card reveal d4"><div class="area-num">04</div><div><h3>QA + Documentación</h3><p>Pruebas, auditoría de contratos y manuales.</p></div><div class="area-symbol" aria-hidden="true"><svg class="hero-icon" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0 1 18 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3 1.5 1.5 3-3.75"/></svg></div></article>
-        </div>
-        <div class="qr-block micro top-badge reveal-scale d5"><img src="assets/votar-c4-qr.png" alt="QR a la arquitectura C4 de VOTAR"><p>Arquitectura C4</p></div>
-      </section>
-
-      <!-- 17 — Parte 3 -->
+      <!-- 14 — Parte 3 -->
       <section class="slide section-slide sgc-votar-section" aria-label="Parte 3: SGC en VOTAR">
         <div class="fingerprint-wall" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
         <div class="word-wall dark wall-a" aria-hidden="true">VOTAR</div><div class="word-wall dark wall-b" aria-hidden="true">VOTAR</div><div class="word-wall dark wall-c" aria-hidden="true">VOTAR</div><div class="word-wall dark wall-d" aria-hidden="true">VOTAR</div><div class="word-wall dark wall-e" aria-hidden="true">VOTAR</div><div class="word-wall dark wall-f" aria-hidden="true">VOTAR</div><div class="word-wall dark wall-g" aria-hidden="true">VOTAR</div><div class="word-wall dark wall-h" aria-hidden="true">VOTAR</div>
         <div class="part reveal">Parte 03 / Implementación</div><div class="dash reveal-left d1"></div><h2 class="reveal d2">SGC en VOTAR</h2>
       </section>
 
-      <!-- 18 — Implementación -->
-      <section class="slide" aria-label="Implementación del SGC en VOTAR">
-        <div class="frame"></div><div class="corner-number">18 / 19</div>
-        <div class="pad"><div class="eyebrow reveal">La tecnología ya resuelve la evidencia</div><h2 class="title reveal d1" style="margin-top:22px">Ahora hay que formalizar</h2></div>
-        <div class="roadmap-grid">
-          <article class="roadmap-step reveal d1"><strong>01</strong><svg class="hero-icon roadmap-icon" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99"/></svg><h3>PDCA en Scrum</h3><p>Mejora continua dentro de las ceremonias.</p></article>
-          <article class="roadmap-step reveal d2"><strong>02</strong><svg class="hero-icon roadmap-icon" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3v1.5M3 21v-6m0 0 2.77-.693a9 9 0 0 1 6.208.682l.108.054a9 9 0 0 0 6.086.71l3.114-.732a48.524 48.524 0 0 1-.005-10.499l-3.11.732a9 9 0 0 1-6.085-.711l-.108-.054a9 9 0 0 0-6.208-.682L3 4.5M3 15V4.5"/></svg><h3>Política + objetivos</h3><p>Metas de calidad cuantificables.</p></article>
-          <article class="roadmap-step reveal d3"><strong>03</strong><svg class="hero-icon roadmap-icon" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"/></svg><h3>No conformidades</h3><p>Causa raíz y acciones correctivas.</p></article>
-          <article class="roadmap-step reveal d4"><strong>04</strong><svg class="hero-icon roadmap-icon" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 0 1-.825-.242m9.345-8.334a2.126 2.126 0 0 0-.476-.095 48.64 48.64 0 0 0-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0 0 11.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155"/></svg><h3>Voz del cliente</h3><p>Canales CSAT y NPS estandarizados.</p></article>
-          <article class="roadmap-step reveal d5"><strong>05</strong><svg class="hero-icon roadmap-icon" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z"/></svg><h3>Ambiente + personas</h3><p>Proof-of-Stake y ergonomía del equipo.</p></article>
+      <!-- 15 — Implementación -->
+      <section class="slide" aria-label="Correspondencia de las normas ISO">
+        <div class="frame"></div>
+        <div class="pad"><div class="eyebrow reveal" aria-hidden="true" style="visibility:hidden">&nbsp;</div><h2 class="title reveal d1" style="margin-top:22px">Conclusión</h2></div>
+        <div class="iso-cover-grid">
+          <article class="iso-card reveal d1"><div class="iso-kicker">ISO</div><div class="num">9001</div><div class="focus">Calidad</div><div class="ghost">Q</div></article>
+          <article class="iso-card reveal d2"><div class="iso-kicker">ISO</div><div class="num">14001</div><div class="focus">Ambiental</div><div class="ghost">A</div></article>
+          <article class="iso-card reveal d3"><div class="iso-kicker">ISO</div><div class="num">45001</div><div class="focus">Seguridad y Salud</div><div class="ghost">S</div></article>
         </div>
-        <div class="implementation-note reveal d4">De evidencia técnica a confianza institucional.</div>
-        <div class="qr-block micro top-badge reveal-scale d5"><img src="assets/votar-c4-qr.png" alt="QR a la arquitectura C4 de VOTAR"><p>Arquitectura C4</p></div>
       </section>
 
-      <!-- 19 — Cierre -->
+      <!-- 16 — Cierre -->
       <section class="slide thanks" aria-label="Gracias">
         <div class="fingerprint-wall" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
         <div class="word-wall dark wall-a" aria-hidden="true">VOTAR</div><div class="word-wall dark wall-b" aria-hidden="true">VOTAR</div><div class="word-wall dark wall-c" aria-hidden="true">VOTAR</div><div class="word-wall dark wall-d" aria-hidden="true">VOTAR</div><div class="word-wall dark wall-e" aria-hidden="true">VOTAR</div><div class="word-wall dark wall-f" aria-hidden="true">VOTAR</div><div class="word-wall dark wall-g" aria-hidden="true">VOTAR</div><div class="word-wall dark wall-h" aria-hidden="true">VOTAR</div>
@@ -1413,8 +2049,13 @@
   </div>
 
   <!-- Viewer chrome sits outside the 1920×1080 stage. -->
-  <div class="progress" id="progress"></div>
+  <div class="progress-track"><div class="progress" id="progress"></div></div>
   <div class="page-count" id="pageCount" aria-live="polite"></div>
+  <button class="fullscreen-toggle" id="fullscreenToggle" title="Pantalla completa (F)" aria-label="Entrar en pantalla completa">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"/>
+    </svg>
+  </button>
   <div class="edit-hotzone" aria-hidden="true"></div>
   <button class="edit-toggle" id="editToggle" title="Modo edición (E)" aria-label="Alternar modo edición">✎</button>
   <div class="edit-toast" id="editToast">Modo edición activo · Ctrl/⌘+S para guardar</div>
@@ -1436,6 +2077,8 @@
         this.setupKeyboardNav();
         this.setupTouchNav();
         this.setupWheelNav();
+        this.setupMouseNav();
+        this.setupFullscreen();
         this.showSlide(0);
       }
 
@@ -1453,6 +2096,7 @@
       setupKeyboardNav() {
         document.addEventListener('keydown', (event) => {
           if (event.target.getAttribute('contenteditable') === 'true') return;
+          if (['BUTTON', 'INPUT', 'TEXTAREA', 'SELECT'].includes(event.target.tagName)) return;
           if (['ArrowRight', 'ArrowDown', ' ', 'PageDown'].includes(event.key)) { event.preventDefault(); this.next(); }
           if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(event.key)) { event.preventDefault(); this.prev(); }
           if (event.key === 'Home') this.showSlide(0);
@@ -1477,6 +2121,62 @@
         }, { passive: true });
       }
 
+      setupMouseNav() {
+        document.addEventListener('click', (event) => {
+          if (document.body.classList.contains('editing')) return;
+          if (event.target.closest('a, button, .edit-hotzone, .edit-toggle')) return;
+          this.next();
+        });
+        document.addEventListener('contextmenu', (event) => {
+          if (document.body.classList.contains('editing')) return;
+          if (event.target.closest('a, button')) return;
+          event.preventDefault();
+          this.prev();
+        });
+      }
+
+      setupFullscreen() {
+        const button = document.getElementById('fullscreenToggle');
+        const isFullscreen = () => !!(document.fullscreenElement || document.webkitFullscreenElement);
+
+        const toggleFullscreen = () => {
+          if (!isFullscreen()) {
+            const request = document.documentElement.requestFullscreen || document.documentElement.webkitRequestFullscreen;
+            if (request) {
+              try {
+                const result = request.call(document.documentElement, { navigationUI: 'hide' });
+                if (result && result.catch) result.catch(() => {});
+              } catch (_) {}
+            }
+          } else {
+            const exit = document.exitFullscreen || document.webkitExitFullscreen;
+            if (exit) {
+              try { exit.call(document); } catch (_) {}
+            }
+          }
+        };
+
+        const syncState = () => {
+          const active = isFullscreen();
+          document.body.classList.toggle('presenting', active);
+          button.setAttribute('aria-label', active ? 'Salir de pantalla completa' : 'Entrar en pantalla completa');
+          button.title = active ? 'Salir de pantalla completa (F)' : 'Pantalla completa (F)';
+        };
+
+        button.addEventListener('click', () => { toggleFullscreen(); button.blur(); });
+        document.addEventListener('keydown', (event) => {
+          if (event.target.getAttribute('contenteditable') === 'true') return;
+          if (document.body.classList.contains('editing')) return;
+          if (event.key === 'f' || event.key === 'F' || event.key === 'p' || event.key === 'P') {
+            event.preventDefault();
+            toggleFullscreen();
+          }
+        });
+        document.addEventListener('fullscreenchange', syncState);
+        document.addEventListener('webkitfullscreenchange', syncState);
+        syncState();
+      }
+
       showSlide(index) {
         this.currentSlide = Math.max(0, Math.min(index, this.slides.length - 1));
         this.slides.forEach((slide, i) => {
@@ -1499,7 +2199,7 @@
     class InlineEditor {
       constructor() {
         this.isActive = false;
-        this.key = 'votar-sgc-edits-v2';
+        this.key = 'votar-sgc-edits-v3';
         this.targets = [...document.querySelectorAll('.slide h1, .slide h2, .slide h3, .slide p, .slide span, .slide strong, .slide li, .slide .hero, .slide .topline, .slide .subtitle, .slide .credit, .slide .part, .slide .formula, .slide .closing-line')];
         this.load();
       }
