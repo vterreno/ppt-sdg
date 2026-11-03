@@ -354,7 +354,7 @@
     .flow-step span { display: block; margin-top: 25px; font: 800 18px/1.16 var(--font-body); text-transform: uppercase; writing-mode: vertical-rl; transform: rotate(180deg); max-height: 158px; }
     .flow-step.bottleneck { background: var(--royal); color: white; border-bottom-color: var(--danger); transform: translateY(-24px); height: 318px; box-shadow: 0 22px 44px rgba(7,83,184,.26); }
     .flow-step.bottleneck strong { color: white; font-size: 49px; }
-    .flow-step.bottleneck::after { content: '65% CA'; position: absolute; left: 10px; right: 10px; bottom: 16px; color: white; font: 800 18px/1 var(--font-body); text-align: center; }
+    .flow-step.bottleneck::after { content: 'MÁS LENTO'; position: absolute; left: 8px; right: 8px; bottom: 16px; color: white; font: 800 16px/1 var(--font-body); text-align: center; }
     .flow-legend { position: absolute; left: 82px; bottom: 125px; display: flex; gap: 40px; align-items: center; }
     .flow-legend .metric { font: 400 87px/.9 var(--font-display); color: var(--royal); letter-spacing: -.06em; }
     .flow-legend p { font: 700 32px/1.22 var(--font-body); max-width: 850px; }
@@ -2001,10 +2001,10 @@
         <div class="frame"></div>
         <div class="pad"><h2 class="title reveal d1 direct-title">Cadena de valor - Proceso electoral</h2></div>
         <div class="flow-band">
-          <div class="flow-step admin reveal d1"><strong>01</strong><span>Autenticación</span></div><div class="flow-step admin reveal d1"><strong>02</strong><span>Comicio</span></div><div class="flow-step admin reveal d1"><strong>03</strong><span>Padrón</span></div><div class="flow-step admin reveal d2"><strong>04</strong><span>Merkle</span></div><div class="flow-step admin reveal d2"><strong>05</strong><span>Oferta</span></div><div class="flow-step admin reveal d2"><strong>06</strong><span>Oficializar</span></div><div class="flow-step admin reveal d3"><strong>07</strong><span>Apertura</span></div><div class="flow-step voter reveal d3"><strong>08</strong><span>Acceso BUD</span></div><div class="flow-step bottleneck reveal-scale d4"><strong>09</strong><span>Criptografía</span></div><div class="flow-step voter reveal d4"><strong>10</strong><span>Selección</span></div><div class="flow-step voter reveal d5"><strong>11</strong><span>Emisión</span></div><div class="flow-step voter reveal d5"><strong>12</strong><span>Recibo</span></div>
+          <div class="flow-step admin reveal d1"><strong>01</strong><span>Autenticación</span></div><div class="flow-step admin reveal d1"><strong>02</strong><span>Comicio</span></div><div class="flow-step admin reveal d1"><strong>03</strong><span>Padrón</span></div><div class="flow-step admin reveal d2"><strong>04</strong><span>Merkle</span></div><div class="flow-step bottleneck reveal-scale d2"><strong>05</strong><span>Oferta</span></div><div class="flow-step admin reveal d2"><strong>06</strong><span>Oficializar</span></div><div class="flow-step admin reveal d3"><strong>07</strong><span>Apertura</span></div><div class="flow-step voter reveal d3"><strong>08</strong><span>Acceso BUD</span></div><div class="flow-step voter reveal d4"><strong>09</strong><span>Criptografía</span></div><div class="flow-step voter reveal d4"><strong>10</strong><span>Selección</span></div><div class="flow-step voter reveal d5"><strong>11</strong><span>Emisión</span></div><div class="flow-step voter reveal d5"><strong>12</strong><span>Recibo</span></div>
         </div>
-        <div class="process-key reveal d4" aria-label="Leyenda de grupos de proceso"><span><i></i>Administración electoral</span><span class="voter-key"><i></i>Experiencia del votante</span><span class="critical-key"><i></i>Punto crítico</span></div>
-        <div class="flow-legend reveal d4"><div class="metric">09</div><p>Preparación criptográfica: el rendimiento depende del <span class="blue">dispositivo</span> y la <span class="blue">red</span>.</p></div>
+        <div class="process-key reveal d4" aria-label="Leyenda de grupos de proceso"><span><i></i>Autoridad electoral</span><span class="voter-key"><i></i>Experiencia del votante</span><span class="critical-key"><i></i>Punto crítico</span></div>
+        <div class="flow-legend reveal d4"><div class="metric">05</div><p>Generación de la oferta: es el paso que <span class="blue">más tiempo</span> demanda.</p></div>
         <div class="qr-block large reveal-scale d4"><img src="assets/votar-c4-qr-hires.png" alt="QR a la arquitectura C4 de VOTAR"><p>Arquitectura C4</p></div>
       </section>
 
