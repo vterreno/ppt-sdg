@@ -1699,6 +1699,8 @@
       background: var(--royal);
       box-shadow: inset 0 -5px 0 var(--danger);
     }
+    .value-chain-slide .flow-step.voter { background: #7fc8ef; }
+    .value-chain-slide .process-key .voter-key i { background: #7fc8ef; }
 
     .shared-sgc-title {
       position: absolute;
@@ -1716,6 +1718,7 @@
     }
     .definition-slide::before,
     .norm-slide::before { top: 220px !important; }
+    .definition-slide .definition-grid { transform: translateY(28px); }
 
     /* QR cards with captions: tighter crop and minimal caption gap. */
     .qr-block.large {
@@ -1897,10 +1900,7 @@
         <h2 class="shared-sgc-title reveal">Sistemas de Gestión de Calidad</h2>
         <div class="pad definition-grid">
           <div class="sgc-mark reveal-scale">SGC</div>
-          <div class="definition-copy">
-            <div class="eyebrow reveal">Sistema de Gestión de Calidad <strong>(SGC)</strong></div>
-            <div class="formula reveal d1">Normas + procesos</div>
-          </div>
+          <div class="definition-copy"><div class="formula reveal d1">Normas + procesos</div></div>
         </div>
       </section>
 
@@ -2003,7 +2003,7 @@
         <div class="flow-band">
           <div class="flow-step admin reveal d1"><strong>01</strong><span>Autenticación</span></div><div class="flow-step admin reveal d1"><strong>02</strong><span>Comicio</span></div><div class="flow-step admin reveal d1"><strong>03</strong><span>Padrón</span></div><div class="flow-step admin reveal d2"><strong>04</strong><span>Merkle</span></div><div class="flow-step admin reveal d2"><strong>05</strong><span>Oferta</span></div><div class="flow-step admin reveal d2"><strong>06</strong><span>Oficializar</span></div><div class="flow-step admin reveal d3"><strong>07</strong><span>Apertura</span></div><div class="flow-step voter reveal d3"><strong>08</strong><span>Acceso BUD</span></div><div class="flow-step bottleneck reveal-scale d4"><strong>09</strong><span>Criptografía</span></div><div class="flow-step voter reveal d4"><strong>10</strong><span>Selección</span></div><div class="flow-step voter reveal d5"><strong>11</strong><span>Emisión</span></div><div class="flow-step voter reveal d5"><strong>12</strong><span>Recibo</span></div>
         </div>
-        <div class="process-key reveal d4" aria-label="Leyenda de grupos de proceso"><span><i></i>Administración electoral</span><span class="voter-key"><i></i>Experiencia del votante</span><span class="critical-key"><i></i>Punto crítico criptográfico</span></div>
+        <div class="process-key reveal d4" aria-label="Leyenda de grupos de proceso"><span><i></i>Administración electoral</span><span class="voter-key"><i></i>Experiencia del votante</span><span class="critical-key"><i></i>Punto crítico</span></div>
         <div class="flow-legend reveal d4"><div class="metric">09</div><p>Preparación criptográfica: el rendimiento depende del <span class="blue">dispositivo</span> y la <span class="blue">red</span>.</p></div>
         <div class="qr-block large reveal-scale d4"><img src="assets/votar-c4-qr-hires.png" alt="QR a la arquitectura C4 de VOTAR"><p>Arquitectura C4</p></div>
       </section>
